@@ -1,0 +1,85 @@
+  {% include head.html %}
+
+    <style type="text/css">
+      #missing {min-height: 28em; min-width: 80%;}
+    </style>
+  </head>
+  <body class="global landing">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    {% if site.pagebar %}
+    {% include page-bar.html %}
+    <div class="pusher">
+    {% endif %}
+        {% include landing-header.html %}
+        <div class="ui vertical segment">
+          <div class="ui page grid">
+            <div class="column">
+              <div class="ui centered inline inverted dimmer">
+                <div class="ui text loader">Your browser is now assembling the table contents, it will take a few moments ...</div>
+              </div>
+              <div class="row">
+                <table id="missing" class="ui striped collapsing very compact small celled table">
+                  <thead>
+                    <tr><th>Nth</th><th>Missing gap</th></tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include footer.html %}
+    {% if site.pagebar %}
+    </div>
+    {% endif %}
+
+    {% include js.html %}
+    <script>
+
+    var gapsarray;
+    var e = document.createElement("tbody");
+
+    function parsegapentry(val, index) {
+      if (index == 0)
+        return parseInt(val, 10);
+      else
+        return val;
+    };
+
+    $('.page.dimmer:first')
+      .dimmer('toggle');
+
+    $(document).ready(function() {
+      $('.ui.dimmer').dimmer('show');
+      $.when(
+          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
+      ).then(function(gapscsv) {
+
+        gapsarray = $.csv.toArrays(gapscsv);
+        var gapsentries = gapsarray.map(function(entry) {
+            return entry.map(parsegapentry)
+          });
+
+        // Find even values not present in gapsarray
+
+        var cnt = 0;
+        var i = 0;
+        for (var g = 2; g <= 200000; g += 2) {
+          while (gapsarray[i][0] < g) i++;
+          if (gapsarray[i][0] > g) {
+            cnt += 1;
+            if (cnt <= 20 || (cnt <= 200 && cnt % 10 == 0) || (cnt % 100 == 0)) {
+              e.innerHTML += `<tr><td class='right'>${cnt}</td><td class='right'>${g.toString()}</td></tr>`;
+            }
+          };
+        }
+        document.getElementById("missing").appendChild(e);
+        return;
+
+      });
+      $('.ui.dimmer').dimmer('hide');
+    });
+    </script>
+  </body>
+</html>

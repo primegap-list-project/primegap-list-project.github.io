@@ -77,10 +77,6 @@
       : '???' + r[8] + ' = ' + get_truncated_primestartstring(r[9]);
     }
 
-    function top20gapswithmeritover10() {
-
-    }
-
     $('.page.dimmer:first')
       .dimmer('toggle');
 
@@ -96,8 +92,8 @@
         var gapsentries = gapsarray.map(function(entry) {
             return entry.map(parsegapentry)
           });
-        var meritsover10 = gapsentries.filter(function(a){return a[7] > 20});
-        var top20 = meritsover10.sort(function(a, b){return b[0] - a[0]}).slice(0, 20);
+        var meritsoverX = gapsentries.filter(function(a){return a[7] > 20});
+        var top20 = meritsoverX.sort(function(a, b){return b[0] - a[0]}).slice(0, 20);
         for (row of top20.entries()) {
           cnt = row[0] + 1;
           row = row[1];

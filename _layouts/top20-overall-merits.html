@@ -92,20 +92,26 @@
         var gapsentries = gapsarray.map(function(entry) {
             return entry.map(parsegapentry)
           });
-        var top20bymerit = gapsentries.sort(function(a, b){return b[7] - a[7]}).slice(0,20);
-        for (row of top20bymerit.entries()) {
-          cnt = row[0] + 1;
-          row = row[1];
+        gapsentries.sort(function(a, b){return b[7] - a[7]});
+
+        var indexes = Array.from({length: 20}, (_, i) => (i + 1));
+        indexes = indexes.concat(Array.of(50,100,150,200,300,400,500));
+
+        indexes.forEach(function(value) {
+          cnt = value;
+          row = gapsentries[cnt-1];
           name = getname();
           e.innerHTML += `<tr><td class='right aligned'>${cnt}</td>
           <td class='right aligned'>${row[0].toString().padStart(6, ' ')}</td>
           <td>${get_primestring(row)}</td>
           <td class='center aligned'>${row[7].toFixed(4).toString()}</td>
           <td>${name}</td><td>${row[6]}</td></tr>`
-        }
-      document.getElementById("ranking").appendChild(e);
-      return;
+        });
+
+        document.getElementById("ranking").appendChild(e);
+        return;
       });
+
       $('.ui.dimmer').dimmer('hide');
     });
 

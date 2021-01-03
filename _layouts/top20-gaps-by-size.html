@@ -83,11 +83,6 @@
       return b[0] - a[0]
     };
 
-    /* largest first */
-    function order_by_merit(a, b) {
-      return b[7] - a[7];
-    };
-
     $('.page.dimmer:first')
       .dimmer('toggle');
 
@@ -104,8 +99,7 @@
             return entry.map(parsegapentry)
           });
         var top20gaps = gapsentries.sort(order_by_gapsize).slice(0, 20);
-        var top20 = top20gaps.sort(order_by_merit);
-        for (row of top20.entries()) {
+        for (row of top20gaps.entries()) {
           cnt = row[0] + 1;
           row = row[1];
           name = getname();
@@ -115,8 +109,8 @@
           <td class='center aligned'>${row[7].toFixed(4).toString()}</td>
           <td>${name}</td><td>${row[6]}</td></tr>`
         }
-      document.getElementById("ranking").appendChild(e);
-      return;
+        document.getElementById("ranking").appendChild(e);
+        return;
       });
       $('.ui.dimmer').dimmer('hide');
     });

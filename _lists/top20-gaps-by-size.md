@@ -1,7 +1,7 @@
 ---
-layout: top20-gaps-by-merit
-title: Top 20 largest gaps ordered by merit
-description: Top 20 largest gaps ordered by merit
+layout: top20-gaps-by-size
+title: Top 20 largest gaps
+description: Top 20 largest gaps
 ---
 <style type="text/css">
     .concise {margin:0; padding:0; line-height: 1.1em;}

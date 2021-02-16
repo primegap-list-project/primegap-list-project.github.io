@@ -1,0 +1,130 @@
+  {% include head.html %}
+
+    <style type="text/css">
+      #ranking {min-height: 28em; min-width: 80%;}
+    </style>
+  </head>
+  <body class="global landing">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    {% if site.pagebar %}
+    {% include page-bar.html %}
+    <div class="pusher">
+    {% endif %}
+        {% include landing-header.html %}
+        <div class="ui vertical segment">
+          <div class="ui page grid">
+            <div class="column">
+              <div class="ui centered inline inverted dimmer">
+                <div class="ui text loader">Your browser is now assembling the table contents, it will take a few moments ...</div>
+              </div>
+              <div class="row">
+                <table id="ranking" class="ui striped collapsing very compact small celled table">
+                  <thead>
+                    <tr><th>Rank</th><th>Gap Size</th><th>Gap start</th><th>Merit</th><th>Discoverer</th><th>Year</th></tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include footer.html %}
+    {% if site.pagebar %}
+    </div>
+    {% endif %}
+
+    {% include js.html %}
+    <script>
+
+    var creditsarray, gapsarray;
+    var e = document.createElement("tbody");
+
+    function parsegapentry(val, index) {
+      if (index == 0)
+          return parseInt(val, 10);
+      else if (index == 1)
+        if (val == '1')
+          return true;
+        else
+          return false;
+      else if (index > 3 && index < 5)
+        return val
+      else if (index == 6)
+        return parseInt(val, 10)
+      else if (index == 7)
+        return parseFloat(val, 10)
+      else if (index == 8)
+        return parseInt(val, 10)
+      else
+        return val;
+    };
+
+    function getname(row) {
+      var name = creditsarray.findIndex(function(credit) {
+        return credit[0] == row[5];
+      });
+      return creditsarray[name][3];
+    }
+
+    function get_truncated_primestartstring(p) {
+      return p.length > 80 ? p.slice(0, 20) + "..." + p.slice(p.length - 20, p.length) : p
+    }
+
+    function get_primestring(r) {
+      return (r[4] == 'C') ? 'P' + r[8] + ' = ' + get_truncated_primestartstring(r[9])
+      : (r[4] == 'P') ? 'PRP' + r[8] + ' = ' + get_truncated_primestartstring(r[9])
+      : '???' + r[8] + ' = ' + get_truncated_primestartstring(r[9]);
+    }
+
+    $('.page.dimmer:first')
+      .dimmer('toggle');
+
+    $(document).ready(function() {
+      $('.ui.dimmer').dimmer('show');
+      $.when(
+          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/credits.csv"),
+          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
+      ).then(function(creditscsv, gapscsv) {
+
+        creditsarray = $.csv.toArrays(creditscsv[0]);
+        gapsarray = $.csv.toArrays(gapscsv[0]);
+        var gapsentries = gapsarray.map(function(entry) {
+            return entry.map(parsegapentry)
+          });
+
+        var record = 1000;
+
+        var low_merit_gaps = gapsentries
+            .filter(function(a) {
+              if (a[3] == "F") {
+                // Skip the early maximal gaps
+                return false;
+              }
+              if (a[7] < record) {
+                record = a[7];
+                return true;
+              }
+              return false;
+            })
+
+        for (row of low_merit_gaps.entries()) {
+          cnt = row[0] + 1;
+          row = row[1];
+          name = getname(row);
+          e.innerHTML += `<tr>
+          <td class='right aligned'>${cnt}</td>
+          <td class='right aligned'>${row[0].toString().padStart(6, ' ')}</td>
+          <td>${get_primestring(row)}</td>
+          <td class='center aligned'>${row[7].toFixed(4).toString()}</td>
+          <td>${name}</td><td>${row[6]}</td></tr>`
+        };
+        document.getElementById("ranking").appendChild(e);
+        return;
+
+      });
+      $('.ui.dimmer').dimmer('hide');
+    });
+    </script>
+  </body>
+</html>

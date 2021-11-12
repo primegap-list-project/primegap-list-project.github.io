@@ -3,12 +3,17 @@ set -eux
 cd _data
 
 # Arg 1 or default path
+# Assumes prime-gap-list checked out at same height as primegap-list-project.github.io
 PRIME_GAP_LIST_DIR="${1:-../../prime-gap-list}"
 
-echo -e "\nDon't forget to git pull in $PRIME_GAP_LIST_DIR\n"
-ls -1h "$PRIME_GAP_LIST_DIR/allgaps.sql"
+cd "$PRIME_GAP_LIST_DIR"
+echo -e "\ngit pull $PRIME_GAP_LIST_DIR\n"
+git pull
+ls -1h "allgaps.sql"
 
-# Assumes prime-gap-list checked out at same height as primegap-list-project.github.io
+# Change back to _data directory
+cd -
+
 rm -f "$PRIME_GAP_LIST_DIR/gaps.db"
 sqlite3 "$PRIME_GAP_LIST_DIR/gaps.db" < "$PRIME_GAP_LIST_DIR/allgaps.sql"
 
@@ -19,4 +24,7 @@ sqlite3 "$PRIME_GAP_LIST_DIR/gaps.db" -csv -noheader "select * from credits" > c
 
 git diff --stat
 
+git add allgaps.csv credits.csv
+git commit -m "$(date +"%Y %B %d") Update" | true
 
+git push

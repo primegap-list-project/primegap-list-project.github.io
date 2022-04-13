@@ -102,7 +102,7 @@
           .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
           .attr('width', width)
           .attr('height', height)
-          .attr('class', 'main')   
+          .attr('class', 'main')
 
         // draw the x axis
         var xAxis = d3.axisBottom()
@@ -126,7 +126,7 @@
           .call(yAxis);
 
         // draw the graph object
-        var g = main.append("svg:g"); 
+        var g = main.append("svg:g");
 
         g.selectAll("scatter-dots")
           .data(ydata)  // using the values in the ydata array
@@ -156,32 +156,7 @@
           .text("Gap size");
     };
 
-    function parsegapentry(val, index) {
-      if (index == 0)
-          return parseInt(val, 10);
-      else if (index == 1)
-        if (val == '1')
-          return true;
-        else
-          return false;
-      else if (index > 3 && index < 5)
-        return val
-      else if (index == 6)
-        return parseInt(val, 10)
-      else if (index == 7)
-        return parseFloat(val, 10)
-      else if (index == 8)
-        return parseInt(val, 10)
-      else
-        return val;
-    };
-
-    function getname() {
-      var name = creditsarray.findIndex(function(credit) {
-        return credit[0] == row[5];
-      });
-      return creditsarray[name][3];
-    }
+    {% include parsegapentry.js %}
 
     $('.page.dimmer:first')
       .dimmer('toggle');

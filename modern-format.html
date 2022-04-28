@@ -1,0 +1,76 @@
+---
+layout: landing
+title: Modern format for prime gap records
+description: Description of the newer format for prime gap record data
+author: Seth Troisi
+date: 27th April 2022
+category: project
+tags: project
+---
+<style type="text/css">
+    .orig h3, .orig h4, .orig p, .orig blockquote p {font-family: serif}
+    .smalltt {font-size:90%}
+</style>
+<div class="ui vertical segment">
+  <div class="ui very relaxed stackable page grid">
+    <div class="column">
+      <div class="row">
+        <div class="orig">
+            <h3>Prime Gap Format</h3>
+            <p>
+              For a history of formatting and more details see
+              <a href="/drtrnicely-format-legacy/">Tom Nicely’s original description</a>.
+            </p>
+            <p>
+              The records reside in a sql script on Github. The schema is detailed in some length in
+              <a href="/project/2019/12/05/sql-schema-for-list">Details and rationale of schema creation</a>.
+              <br>
+            </p>
+            <p>
+              The fields are fairly decriptive with the exception of "primecat", "primecert", "ismax", and "isfirst".
+              <br>
+              <ul>
+                <li>
+                  <strong>"ismax"</strong>
+                  : is this gap a maximal gap (strictly exceeding in measure all the prime gaps preceding it)?
+                  <br>
+                  Values: 1 and 0
+                </li>
+                <li>
+                  <strong>"isfirst"</strong>
+                  : is this the first gap of this size?
+                  <br>
+                  The character "F" signifies that the gap has definitely been established (by an exhaustive scan to or beyond that point) as a first occurrence prime gap.
+                  <br>
+                  Values: "F" and ""
+                </li>
+                <li>
+                  <strong>"primecat"</strong>
+                  : The categorization (or classification) of the prime gap
+                  <br>
+                  The character "C" signifies conventional (common, classic,  standard, regular, ordinary, normal) prime gaps.
+                  <br>
+                  At this time no other values are used.
+                  <br>
+                  Values: "C"
+                </li>
+                <li>
+                  <strong>"primecert"</strong>
+                  : The certification of the bounding integers of the gap.
+                  <br>
+                  The character "C" signifies certified primes (e.g. ECPP).
+                  <br>
+                  The character "P" signifies probabilistic primes.
+                  <br>
+                  The character "?" signifies the gap is unverified but taken from a
+                  <a href="https://www.mersenneforum.org/showpost.php?p=557364&postcount=126">trusted discoverer</a>
+                  <br>
+                  Values: "C" and "P"
+                </li>
+              </ul>
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

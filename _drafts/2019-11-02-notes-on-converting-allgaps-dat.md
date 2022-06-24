@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `gaps` (
 
 (where `BLOB` is an acronym for “Binary Large OBject” and happily accepts very long primes as strings)
 
-The related data of keys to abbreviations, discoverers full names and ackowledgements of contribution is maintained in the same file. As such, the file of SQL INSERT statements and data schema specifications is a standalone representation of all the related data. 
+The related data of keys to abbreviations, discoverers full names and ackowledgements of contribution is maintained in the same file. As such, the file of SQL INSERT statements and data schema specifications is a standalone representation of all the related data.
 
 #### The exported data remains in plaintext form
 

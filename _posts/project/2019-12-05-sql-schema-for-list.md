@@ -2,7 +2,7 @@
 layout: post
 author: Graham Higgins
 category: project
-title: SQL schema for representing the list of first known occurrence prime gaps 
+title: SQL schema for representing the list of first known occurrence prime gaps
 tags: projectdoc
 excerpt: Details and rationale of schema creation
 ---
@@ -126,14 +126,14 @@ This list of discoverers was hand-formatted as SQL statements.
 
 ##### A relational database representation of the list of known first occurrence prime gaps
 
-A [SQLite](https://www.sqlite.org/) database is a single disk file. The file format is cross-platform. A database that is created on one machine can be copied and used on a different machine with a different architecture. SQLite databases are portable across 32-bit and 64-bit machines and between big-endian and little-endian architectures. 
+A [SQLite](https://www.sqlite.org/) database is a single disk file. The file format is cross-platform. A database that is created on one machine can be copied and used on a different machine with a different architecture. SQLite databases are portable across 32-bit and 64-bit machines and between big-endian and little-endian architectures.
 
 
 Each value stored in an SQLite database (or manipulated by the database engine) has one of the following storage classes:
 
     NULL. The value is a NULL value.
 
-    INTEGER. The value is a signed integer, stored in 1, 2, 3, 4, 6, or 8 
+    INTEGER. The value is a signed integer, stored in 1, 2, 3, 4, 6, or 8
              bytes depending on the magnitude of the value.
 
     REAL. The value is a floating point value, stored as an 8-byte

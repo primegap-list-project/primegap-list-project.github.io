@@ -113,7 +113,7 @@
           else
             return false;
         else if (index > 3 && index < 5)
-          // primetype, isfirst, primecert, discoverer
+          // primetype, isfirst, gapcert, discoverer
           return val
         else if (index == 6)
           // year
@@ -166,7 +166,7 @@
             if (!(typeof isbetter === 'undefined')) {
               found++;
               cnt++;
-              sql += `UPDATE gaps SET ismax=${row[1]},primecat='${row[2]}',isfirst='${row[3]}',primecert='${row[4]}',discoverer='${row[5]}',year=${row[6]},merit=${row[7]},primedigits=${row[8]},startprime='${row[9]}' WHERE gapsize=${row[0]};\n`
+              sql += `UPDATE gaps SET ismax=${row[1]},primecat='${row[2]}',isfirst='${row[3]}',gapcert='${row[4]}',discoverer='${row[5]}',year=${row[6]},merit=${row[7]},primedigits=${row[8]},startprime='${row[9]}' WHERE gapsize=${row[0]};\n`
             }
             else {
               cnt++;
@@ -183,7 +183,7 @@
       }
       convertButton.addEventListener("click", convertEditorContents, true);
 
-      xhrDoc = new XMLHttpRequest();   
+      xhrDoc = new XMLHttpRequest();
 
       xhrDoc.open('GET', "https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
       if (xhrDoc.overrideMimeType)
@@ -208,7 +208,7 @@
       xhrDoc.send();
     });
     </script>
-      
+
   </body>
 
 </html>

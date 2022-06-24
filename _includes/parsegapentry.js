@@ -30,8 +30,9 @@
     }
 
     function get_primestring(r) {
-      return (r[4] == 'C') ? 'P' + r[8] + ' = ' + get_truncated_primestartstring(r[9])
-      : (r[4] == 'P') ? 'PRP' + r[8] + ' = ' + get_truncated_primestartstring(r[9])
-      : 'Unverified ' + r[8] + ' = ' + get_truncated_primestartstring(r[9]);
+      var c = r[4].toLowerCase();
+      var str = r[8] + ' = ' + get_truncated_primestartstring(r[9])
+      var label = (c == 'c') ? 'P' : (c == 'p' || c == 'd') ? 'PRP' : (c == 't') ? '(unchecked from trusted discoverer) ' : '??? ';
+      return label + str;
     }
 

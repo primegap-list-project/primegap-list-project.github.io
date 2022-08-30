@@ -21,8 +21,8 @@ excerpt: An explanation of the gap classification and rationale
 
 One of the challenges of the prime gap pages is making sure the submitted gaps are correct.
 Ideally there would be a check on the bounding integers: are they prime? And the
-intermittent numbers: are they composite? If this double check confirms the submitted gap,
-only then would it should be accepted.
+intermittent numbers: are they composite? Ideally only after a double check confirms the submitted gap,
+ would it be accepted.
 
 
 In the real world the larger the starting value of the gap the longer and longer the
@@ -65,7 +65,7 @@ gap was fully double checked.
 
 Very large gaps (think top 20 sized gaps) can take too long to check these will be added with the
 lowest classification, lower-case "d" (the server always checks the endpoints) or manually as "t".
-If the internal gap is fully checks later, the classification can be upgraded to "D".
+If the internal gap is fully checked later, the classification can be upgraded to "D".
 
 ## How does the GitHub prime gap page check the gaps?
 
@@ -86,7 +86,7 @@ At this time the server lacks ECPP capability and can't certify endpoints.
 [In the future](https://github.com/sethtroisi/prime-gap-record-server/issues/1)
 small gaps (think gap <= 5000) will have bounding primes certified prime and all intermittent
 integers checked. This is the highest level of certainty that can be achieved and these gaps
-would/will be marked with a capital "C".
+will be marked with a capital "C".
 
 
 ## How can I upgrade the classification?

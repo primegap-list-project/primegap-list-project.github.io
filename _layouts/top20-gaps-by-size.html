@@ -37,7 +37,6 @@
     {% include js.html %}
     <script>
 
-    var creditsarray, gapsarray;
     var tbody = document.createElement("tbody");
 
     {% include parsegapentry.js %}
@@ -52,16 +51,7 @@
 
     $(document).ready(function() {
       $('.ui.dimmer').dimmer('show');
-      $.when(
-          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/credits.csv"),
-          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
-      ).then(function(creditscsv, gapscsv) {
-
-        creditsarray = $.csv.toArrays(creditscsv[0]);
-        gapsarray = $.csv.toArrays(gapscsv[0]);
-        var gapsentries = gapsarray.map(function(entry) {
-            return entry.map(parsegapentry)
-          });
+      get_CSV_parse_ready(function(creditsarray, gapsentries) {
         var top20gaps = gapsentries.sort(order_by_gapsize).slice(0, 20);
         for (row of top20gaps.entries()) {
           cnt = row[0] + 1;

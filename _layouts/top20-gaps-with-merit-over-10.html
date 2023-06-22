@@ -47,16 +47,8 @@
 
     $(document).ready(function() {
       $('.ui.dimmer').dimmer('show');
-      $.when(
-          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/credits.csv"),
-          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
-      ).then(function(creditscsv, gapscsv) {
 
-        creditsarray = $.csv.toArrays(creditscsv[0]);
-        gapsarray = $.csv.toArrays(gapscsv[0]);
-        var gapsentries = gapsarray.map(function(entry) {
-            return entry.map(parsegapentry)
-          });
+      get_CSV_parse_ready(function(creditsarray, gapsentries) {
         var meritsoverX = gapsentries.filter(function(a){return a[7] > 10});
         var top20 = meritsoverX.sort(function(a, b){return b[0] - a[0]}).slice(0, 20);
         for (row of top20.entries()) {

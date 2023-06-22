@@ -36,3 +36,22 @@
       return label + str;
     }
 
+    function get_CSV_parse_ready(func) {
+      // get_CSV_parse_ready(function(creditsarray, gapsentries) {
+      $.when(
+          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/credits.csv"),
+          $.get("https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/allgaps.csv")
+      ).then(function(creditscsv, gapscsv) {
+        //creditsarray = $.csv.toArrays(creditscsv[0]);
+        //gapsarray = $.csv.toArrays(gapscsv[0]);
+
+        var creditsarray = Papa.parse(creditscsv[0]);
+        var gapsarray = Papa.parse(gapscsv[0]);
+
+        var gapsentries = gapsarray.data.map(function(entry) {
+            return entry.map(parsegapentry)
+          });
+
+        func(creditsarray.data, gapsentries);
+      });
+    }

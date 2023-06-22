@@ -3,6 +3,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+<script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 
 $(document)
@@ -23,7 +24,7 @@ $(document)
 
     $('.sidebar').first()
       .sidebar('attach events', '.pagebar');
-    
+
     $('.pagebar')
       .removeClass('disabled');
 
@@ -35,7 +36,7 @@ $(document)
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
-    
+
     $('.ui.rating')
       .rating({
         maxRating: 5
@@ -43,7 +44,7 @@ $(document)
 
     $('.ui.rating')
       .rating('disable');
-      
+
     $('.embed-features')
       .popup();
 
@@ -53,7 +54,7 @@ $(document)
     $('.ui.accordion')
       .accordion();
 
-});  
+});
 </script>
 
 {% if site.uservoice %}

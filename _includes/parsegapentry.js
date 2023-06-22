@@ -18,7 +18,7 @@
         return val;
     };
 
-    function getname(abbrev) {
+    function getname(creditsarray, abbrev) {
       var name = creditsarray.findIndex(function(credit) {
         return credit[0] == abbrev;
       });
@@ -45,13 +45,13 @@
         //creditsarray = $.csv.toArrays(creditscsv[0]);
         //gapsarray = $.csv.toArrays(gapscsv[0]);
 
-        var creditsarray = Papa.parse(creditscsv[0]);
-        var gapsarray = Papa.parse(gapscsv[0]);
+        var creditsarray = Papa.parse(creditscsv[0]).data;
+        var gapsarray = Papa.parse(gapscsv[0]).data;
 
-        var gapsentries = gapsarray.data.map(function(entry) {
+        var gapsentries = gapsarray.map(function(entry) {
             return entry.map(parsegapentry)
           });
 
-        func(creditsarray.data, gapsentries);
+        func(creditsarray, gapsentries);
       });
     }

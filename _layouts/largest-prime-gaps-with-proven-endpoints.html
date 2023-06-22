@@ -52,7 +52,7 @@
         for (row of top20.entries()) {
           cnt = row[0] + 1;
           row = row[1];
-          name = getname(row[5]);
+          name = getname(creditsarray, row[5]);
           var tr = document.createElement("tr");
           tr.innerHTML += `<td class='right aligned'>${cnt}</td>
           <td class='right aligned'>${row[0].toString().padStart(6, ' ')}</td>

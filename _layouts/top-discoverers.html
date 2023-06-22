@@ -72,7 +72,7 @@
         for (var [key, value] of tallysorted) {
           cnt++;
           if (value > 0) {
-            name = getname(key);
+            name = getname(creditsarray, key);
             var total = value;
             var percent = (value / gapsentries.length) * 100.0;
             var tr = document.createElement("tr");

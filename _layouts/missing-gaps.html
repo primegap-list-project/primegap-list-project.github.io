@@ -38,7 +38,7 @@
     <script>
 
     var gapsarray;
-    var e = document.createElement("tbody");
+    var tbody = document.createElement("tbody");
 
     function parsegapentry(val, index) {
       if (index == 0)
@@ -70,11 +70,13 @@
           if (gapsarray[i][0] > g) {
             cnt += 1;
             if (cnt <= 20 || (cnt <= 200 && cnt % 10 == 0) || (cnt % 100 == 0)) {
-              e.innerHTML += `<tr><td class='right'>${cnt}</td><td class='right'>${g.toString()}</td></tr>`;
+              var tr = document.createElement("tr");
+              tr.innerHTML += `<td class='right'>${cnt}</td><td class='right'>${g.toString()}</td>`;
+              tbody.appendChild(tr);
             }
           };
         }
-        document.getElementById("missing").appendChild(e);
+        document.getElementById("missing").appendChild(tbody);
         return;
 
       });

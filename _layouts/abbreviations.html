@@ -23,9 +23,9 @@
 
     <script>
     $(document).ready(function() {
-    
+
       var data, tdata = "";
-      xhrDoc = new XMLHttpRequest();   
+      xhrDoc = new XMLHttpRequest();
 
       xhrDoc.open('GET', "https://raw.githubusercontent.com/primegap-list-project/primegap-list-project.github.io/master/_data/credits.csv")
       if (xhrDoc.overrideMimeType)
@@ -57,18 +57,18 @@
             console.log(data);
             console.log(data[0]);
             // Parse the csv strings into objects as appropriate
-            var e = document.createElement("tbody");
+            var tbody = document.createElement("tbody");
             for (row of data.entries()) {
-              html = `<tr>
-<td>${row[1][0]}</td><td>${row[1][1]}</td><td>${row[1][2]}</td></tr>`
-              e.innerHTML += html;
+              tr = document.createElement("tr")
+              tr.innerHTML = `<td>${row[1][0]}</td><td>${row[1][1]}</td><td>${row[1][2]}</td>`;
+              tbody.appendChild(tr);
               }
-            document.getElementById("abbrevkeys").appendChild(e);
+            document.getElementById("abbrevkeys").appendChild(tbody);
             $('.ui.dimmer').dimmer('hide');
             };
           }
         }
-      xhrDoc.send() //sending the request      
+      xhrDoc.send() //sending the request
     });
     </script>
   </body>

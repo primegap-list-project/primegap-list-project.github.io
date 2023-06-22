@@ -38,7 +38,7 @@
     <script>
 
     var creditsarray, gapsarray, tally;
-    var e = document.createElement("tbody");
+    var tbody = document.createElement("tbody");
 
     {% include parsegapentry.js %}
 
@@ -83,15 +83,16 @@
             name = getname(key);
             var total = value;
             var percent = (value / gapsentries.length) * 100.0;
-            e.innerHTML += `<tr>
+            var tr = document.createElement("tr");
+            tr.innerHTML += `
             <td class='right aligned'>${cnt}</td>
             <td>${name}</td>
             <td>${total}</td>
-            <td>${percent.toFixed(3)}</td>
-            </tr>`
+            <td>${percent.toFixed(3)}</td>`;
+            tbody.appendChild(tr);
           }
         }
-      document.getElementById("ranking").appendChild(e);
+      document.getElementById("ranking").appendChild(tbody);
       return;
       });
       $('.ui.dimmer').dimmer('hide');

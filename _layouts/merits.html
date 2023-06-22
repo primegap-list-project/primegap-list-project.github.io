@@ -16,12 +16,12 @@
     {% if site.pagebar %}
     </div>
     {% endif %}
-    
+
     {% include js.html %}
     <script>
 
     var gapsarray;
-    var d =  document.getElementById("merits");
+    var merits = document.getElementById("merits");
 
     function parsegapentry(val, index) {
       if (index == 0)
@@ -61,7 +61,7 @@
         for (row of gaps.entries()) {
           html += row[1][0].toString().padStart(6, ' ') + '\t' + row[1][7].toFixed(4).toString() + '\t' + row[1][5] + '\t' + row[1][6] + '\n';
         }
-        d.innerHTML = html;
+        merits.innerHTML = html;
       return;
       });
       $('.ui.dimmer').dimmer('hide');

@@ -44,7 +44,7 @@
 
     function update_tally(gaps, credits) {
       tally = {};
-      creditsarray.forEach(function(val){ tally[val[0]] = 0});
+      credits.forEach(function(val){ tally[val[0]] = 0});
       for (row of gaps.entries()) {
         tally[row[1][5]]++;
       }

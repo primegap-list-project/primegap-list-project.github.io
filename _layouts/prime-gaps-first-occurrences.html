@@ -22,7 +22,7 @@
               <div class="row">
                 <table id="ranking" class="ui striped collapsing very compact small celled table">
                   <thead>
-                    <tr><th>Rank</th><th>Confirmed</th><th>Gap Size</th><th>Gap start</th><th>Merit</th><th>Discoverer</th><th>Year</th></tr>
+                    <tr><th>Rank</th><th>Is Maximal</th><th>Gap Size</th><th>Gap start</th><th>Merit</th><th>Discoverer</th><th>Year</th></tr>
                   </thead>
                 </table>
               </div>
@@ -50,30 +50,12 @@
       get_CSV_parse_ready(function(creditsarray, gapsentries) {
         var recordgaps = gapsentries
             .filter(function(a) {
-                if (a[1]) {
+                if (a[3] == 'F') {
                   return true;
                 }
                 return false;
             });
-        var record = recordgaps[recordgaps.length - 1][0];
-
-        var unconfirmed_recordgaps = gapsentries
-            .sort(function(a, b) {
-                // sort by log(start_prime) = gap / merit
-                return a[0] / a[7] - b[0] / b[7];
-            })
-            .filter(function(a) {
-              if (a[0] > record) {
-                return true;
-              }
-              return false;
-            })
-
-        // TODO add a divider between confirmed and unconfirmed.
-
-        var records = recordgaps.concat(unconfirmed_recordgaps);
-
-        for (row of records.entries()) {
+        for (row of recordgaps.entries()) {
           cnt = row[0] + 1;
           row = row[1];
           name = getname(creditsarray, row[5]);

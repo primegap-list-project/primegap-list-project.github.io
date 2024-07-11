@@ -64,6 +64,7 @@
             })
             .filter(function(a) {
               if (a[0] > record) {
+                record = a[0]
                 return true;
               }
               return false;

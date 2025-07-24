@@ -21,7 +21,7 @@
 
 ### Development Automation
 
-- **script** Automation shell scripts for development, testing. [TO DO] Replace with Gulp pipeline automation, E2E, Lint tests.
+- **script** Automation shell scripts for development, testing.
 
 ## Dependencies
 

@@ -22,7 +22,9 @@
       var name = creditsarray.findIndex(function(credit) {
         return credit[0] == abbrev;
       });
-      return creditsarray[name][3];
+      if (name != -1)
+        return creditsarray[name][3];
+      return abbrev;
     }
 
     function get_truncated_primestartstring(p) {

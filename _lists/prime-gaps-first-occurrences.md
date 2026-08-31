@@ -5,4 +5,5 @@ author: Seth Troisi
 category: list
 tags: list
 description: First occurrence prime gaps
+num: 3
 ---

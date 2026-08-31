@@ -13,19 +13,21 @@ description: Tables of record prime gaps, discoverers, etc.
       <div class="row">
         <div class="column">
           <div class="ui animated selection list">
-          {% for list in site.lists %}
+          {% assign sorted = site.lists | sort_natural: "title" | sort: "num" %}
+          {% for list in sorted %}
             <a class="item" href="{{ list.url }}">
               <div class="ui header" style="padding: 0.6em"><i class="blue certificate icon"></i>{{ list.title }}</div>
             </a>
           {% endfor %}
+          <hr>
+            <a class="item" href="/modern-format/">
+              <div class="ui header" style="padding: 0.6em"><i class="blue certificate icon"></i>Current description of prime gap record data fields</div>
+            </a>
             <a class="item" href="/prime-gap-record-data-fields/">
               <div class="ui header" style="padding: 0.6em"><i class="blue certificate icon"></i>Characterisation of prime gap record data fields</div>
             </a>
             <a class="item" href="/drtrnicely-format-legacy/">
               <div class="ui header" style="padding: 0.6em"><i class="blue certificate icon"></i>Tom Nicely’s original description of prime gap record data fields</div>
-            </a>
-            <a class="item" href="/modern-format/">
-              <div class="ui header" style="padding: 0.6em"><i class="blue certificate icon"></i>Current description of prime gap record data fields</div>
             </a>
           </div>
         </div>

@@ -13,16 +13,21 @@ gem "minima", "~> 2.5"
 
 require 'json'
 require 'open-uri'
-versions = JSON.parse(URI.open('https://pages.github.com/versions.json').read)
+gh_page_versions = begin
+  JSON.parse(URI.open('https://pages.github.com/versions.json').read)
+  versions['github-pages']
+rescue StandardError
+  ' >= 232'
+end
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
-gem 'github-pages', versions['github-pages']
+gem 'github-pages', gh_page_versions
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.13.0"
+  gem "jekyll-feed", "~> 0.17.0"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

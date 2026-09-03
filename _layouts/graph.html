@@ -54,7 +54,6 @@
           ['#9cc8e1', '#96c5e0', '#90c2de', '#8abfdd', '#84bbdb', '#7eb8da', '#78b5d8', '#72b1d7', '#6caed5', '#66aad3', '#61a7d1', '#5ba3d0', '#569fce', '#519ccc', '#4c98ca', '#4794c8', '#4391c6', '#3e8dc3', '#3a89c1', '#3585bf', '#3181bd', '#2d7dbb', '#2979b8', '#2574b6', '#2270b3', '#1e6cb0', '#1b68ae', '#1864aa', '#1560a7', '#125ca4', '#1058a0', '#0e549c', '#0c5097', '#0b4c92', '#0a488d', '#094487', '#084082', '#083b7c', '#083776', '#083370']);
 
       {% if page.xscale %}
-
         {% if page.xscale == 'scalePow' %}
         console.log("Setting x scale as Pow");
         var x = d3.scalePow()
@@ -63,12 +62,12 @@
         {% elsif page.xscale == 'scaleLog' %}
         console.log("Setting x scale as Log");
         var x = d3.scaleLog()
-                  .domain([1, d3.max(xdata)])  // the range of the values to plot
+                  .domain(d3.extent(xdata))    // the range of the values to plot
                   .range([ 1, width ]);        // the pixel range of the x-axis
         {% else %}
         console.log("Setting x scale as Linear");
         var x = d3.scaleLinear()
-                  .domain([1, d3.max(xdata)])  // the range of the values to plot
+                  .domain(d3.extent(xdata))    // the range of the values to plot
                   .range([ 1, width ]);        // the pixel range of the x-axis
         {% endif %}
       {% endif %}
@@ -81,13 +80,13 @@
       {% elsif page.yscale == 'scaleLog' %}
         console.log("Setting y scale as Log");
         var y = d3.scaleLog()
-                  .domain([1, d3.max(ydata)])  // the range of the values to plot
+                  .domain(d3.extent(ydata))    // the range of the values to plot
                   .range([ height, 0 ]);
       {% else %}
         console.log("Setting y scale as Linear");
         var y = d3.scaleLinear()
-                  .domain([1, d3.max(ydata)])  // the range of the values to plot
-                  .range([ height, 1 ]);        // the pixel range of the x-axis
+                  .domain(d3.extent(ydata))    // the range of the values to plot
+                  .range([ height, 1 ]);       // the pixel range of the x-axis
       {% endif %}
 
         // the chart object, includes all margins

@@ -8,7 +8,8 @@ description: Plots of gap size, prime digits, merit by discoverer.
       <div class="row">
         <div class="column">
           <div class="ui animated selection list">
-          {% for graph in site.graphs %}
+          {% assign sorted = site.graphs | sort_natural: "title" %}
+          {% for graph in sorted %}
             <a class="item" href="{{ graph.url }}">
               <div class="ui header" style="padding: 0.6em">{{ graph.title }}</div>
             </a>

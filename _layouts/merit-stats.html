@@ -29,6 +29,12 @@
     {% endif %}
 
     {% include js.html %}
+    <style>
+      table th {
+        white-space: nowrap;
+      }
+    </style>
+
     <script>
 
       $('.page.dimmer:first')
@@ -50,10 +56,10 @@
           "total"
       ];
 
-      var max_merit = 35;
-      const merit_bins = [10, 12, 14]
-          .concat(Array(max_merit - 15 + 1).fill().map((_, idx) => 15 + idx))
-          .concat([42]);
+      var max_merit_bin = 35;
+      const merit_bins = [10]
+          .concat(Array(max_merit_bin - 15 + 1).fill().map((_, idx) => 15 + idx))
+          .concat([40,45]);
 
       function stats() {
         return {
@@ -65,7 +71,7 @@
         };
       }
 
-      // TODO also group by year and discoverer.
+      // TODO also group discoverer.
 
       var interval_stats = {};
       for (gap of gap_breaks) {
@@ -132,8 +138,13 @@
           h.appendChild(table_part("th", "Count"));
           h.appendChild(table_part("th", "Avg"));
 
-          for (bin of merit_bins) {
-            h.appendChild(table_part("th", "<" + bin));
+          for (const [i, bin] of merit_bins.entries()) {
+            const last = i == 0 ? 0 : merit_bins[i - 1]
+            if (last + 1 < bin) {
+              h.appendChild(table_part("th", last + " - " + bin));
+            } else {
+              h.appendChild(table_part("th", bin - 1));
+            }
           }
 
           var b = document.createElement("tbody");
@@ -169,8 +180,13 @@
           h.appendChild(table_part("th", "Count"));
           h.appendChild(table_part("th", "Avg"));
 
-          for (bin of merit_bins) {
-            h.appendChild(table_part("th", "<" + bin));
+          for (const [i, bin] of merit_bins.entries()) {
+            const last = i == 0 ? 0 : merit_bins[i - 1]
+            if (last + 1 < bin) {
+              h.appendChild(table_part("th", last + " - " + bin));
+            } else {
+              h.appendChild(table_part("th", bin - 1));
+            }
           }
 
           b = document.createElement("tbody");

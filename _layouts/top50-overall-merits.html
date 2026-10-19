@@ -50,8 +50,8 @@
       get_CSV_parse_ready(function(creditsarray, gapsentries) {
         gapsentries.sort(function(a, b){return b[7] - a[7]});
 
-        var indexes = Array.from({length: 20}, (_, i) => (i + 1));
-        indexes = indexes.concat(Array.of(50,100,150,200,300,400,500));
+        var indexes = Array.from({length: 50}, (_, i) => (i + 1));
+        indexes = indexes.concat(Array.of(100,200,300,400,500,1000));
 
         indexes.forEach(function(value) {
           cnt = value;
